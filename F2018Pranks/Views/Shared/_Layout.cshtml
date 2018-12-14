@@ -18,9 +18,14 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Best Office Pranks", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Pranks", "Index", "Pranks")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -31,6 +36,10 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - COMP2084 - F2018 Final</p>
+            <p>Student Name: Dhvanit Merchant</p>
+            <p>Student Number: 200382214</p>
+
+
         </footer>
     </div>
 

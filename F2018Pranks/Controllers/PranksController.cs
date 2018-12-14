@@ -10,9 +10,11 @@ using F2018Pranks.Models;
 
 namespace F2018Pranks.Controllers
 {
+    //Authorization Added
+    [Authorize(Roles = "")]
     public class PranksController : Controller
     {
-        private DbModel db = new DbModel();
+       // private DbModel db = new DbModel();
         private IMockPrank db;
 
         public PranksController()
@@ -28,7 +30,10 @@ namespace F2018Pranks.Controllers
         // GET: Pranks
         public ActionResult Index()
         {
-            return View(db.Pranks.ToList());
+            var pranks = db.Pranks;
+            return View("Index", pranks.ToList());
+        
+
         }
 
         // GET: Pranks/Details/5
@@ -36,20 +41,22 @@ namespace F2018Pranks.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("Error");
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Prank prank = db.Pranks.Find(id);
+            Prank prank = db.Pranks.SingleOrDefault(p => p.PrankId == id);
             if (prank == null)
             {
-                return HttpNotFound();
+                return View("Error");
+
             }
-            return View(prank);
+            return View("Details",prank);
         }
 
         // GET: Pranks/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: Pranks/Create
@@ -61,8 +68,7 @@ namespace F2018Pranks.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Pranks.Add(prank);
-                db.SaveChanges();
+                db.Save(prank);
                 return RedirectToAction("Index");
             }
 
