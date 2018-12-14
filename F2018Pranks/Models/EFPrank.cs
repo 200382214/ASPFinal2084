@@ -13,7 +13,20 @@ namespace F2018Pranks.Models
 
         public Prank Save(Prank prank)
         {
-            throw new NotImplementedException();
+            if (prank.PrankId == 0)
+            {
+                //insert
+                db.Pranks.Add(prank);
+
+            }
+            else
+            {
+                //update
+                db.Entry(prank).State = System.Data.Entity.EntityState.Modified;
+
+            }
+            db.SaveChanges();
+            return prank;
         }
     }
 }

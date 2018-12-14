@@ -72,7 +72,7 @@ namespace F2018Pranks.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(prank);
+            return View("Create", prank);
         }
     }
 }

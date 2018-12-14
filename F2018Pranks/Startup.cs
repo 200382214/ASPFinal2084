@@ -8,7 +8,9 @@ namespace F2018Pranks
     {
         public void Configuration(IAppBuilder app)
         {
+
             ConfigureAuth(app);
+
         }
     }
 }

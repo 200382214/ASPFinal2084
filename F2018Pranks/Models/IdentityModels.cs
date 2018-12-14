@@ -29,5 +29,7 @@ namespace F2018Pranks.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<F2018Pranks.Models.Prank> Pranks { get; set; }
     }
 }
